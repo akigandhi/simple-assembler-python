@@ -1,0 +1,119 @@
+import re
+def main():
+    f = open('tp.txt','r')
+    a = open('mnemtab.txt','r')
+    r = open('symtab.txt','w')
+    l = open('littab.txt','w')
+    o = open('out.txt','w')
+    start = f.read().split()
+    counter = int(start[1])-1
+    aki = 0
+    
+  
+    for index,i in enumerate( start):
+            o.write('\n'+str(counter)+' + ')
+        
+            counter+=1
+            b = i.split()
+            for c in b:
+                if c == 'START':
+                    
+                    break
+                elif c == 'STOP':
+                    
+                    o.write('00 0 000')
+                    f.close()
+                    a.close()
+                    r.close()
+                    l.close()
+                    o.close()
+                    handle(counter,index+1)
+                   
+                    nhandle()
+                    print('DONE!')
+                    aki+=1
+                    break
+              
+                if c == 'AREG':
+                    o.write('1 ')
+                    continue
+                    
+                elif c == 'BREG':
+                    o.write('2 ')
+                    continue
+                elif c == 'CREG':
+                    o.write('3 ')
+                    continue
+                elif c == 'DREG':
+                    o.write('4 ')
+                    continue                   
+                co = 0
+                for line in a:
+                    
+                    word = line.split()
+                    for lt,eword in enumerate(word):
+                        if c == eword:
+                            o.write(str(word[lt+1])+' ')
+                            co+=1
+                            break
+                    if co == 1:   
+                        break
+                
+                if co == 0:
+                    
+                    o.write(c+' ')  
+                    
+            if aki > 0:
+                break      
+                
+    
+                        
+                        
+                
+def handle(conter,ind): 
+    g = open('tp.txt','r')
+    s = open('symtab.txt','w')
+    p = open('out.txt','w')
+    for inde,lis in enumerate(g):
+        if inde > ind:
+            p.write('\n'+str(conter)+' + ')
+            
+            
+            sp = lis.split()
+            for cou,ew in enumerate(sp):
+                if ((sp[cou+1]!=''and sp[cou+1] == 'DS')or (sp[cou+1]!=''and sp[cou+1] == 'DC')):
+                    s.write(ew+' '+str(conter))
+                elif ew == 'DC':
+                    p.write('00 0 00'+sp[cou+1])
+                    break
+            conter+=1
+    g.close()
+    s.close()
+    p.close()
+                
+def nhandle():
+    my = open('out.txt','w+')
+    by = open('symtab.txt','w+')
+    for ata in my:
+        aba = ata.split()
+        for eaw in aba:
+            for bata in by:
+                ara = bata.split()
+                for ist,ewo in enumerate(ara):
+                    if eaw == ewo:
+                        my.write(re.sub(eaw,str(ara[ist+1]),ata))
+                        break
+                break
+            break
+        
+                        
+    
+                    
+                    
+              
+                        
+        
+       
+            
+if __name__ == "__main__":main()
+    
